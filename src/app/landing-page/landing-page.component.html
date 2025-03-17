@@ -1,0 +1,29 @@
+<div class="row h-100">
+    <div class="col--lg-12 col--md-12 col--sm-12 d-flex align-items-center justify-content-center">
+        <div class="card">
+            <img class="card-img-top" alt="Card image cap">
+            <div class="card-body">
+                <ul class="m-0 p-0 d-flex">
+                    <ng-container *ngFor="let tab of tabs, let idx = index">
+                        <li class="px-2">
+                            <button class="btn btn-primary btn-md" (click)="selectTab(tab)">
+                                {{tab.label}}
+                            </button>
+                        </li>
+                    </ng-container>
+                </ul>
+                <div class="w-100" [ngSwitch]="currentModule">
+                    <ng-container *ngSwitchDefault>
+                        <p>Sign In</p>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'sign-up'">
+                        <p>Sign Up</p>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'forgot-password'">
+                        <p>Forgot Password</p>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
