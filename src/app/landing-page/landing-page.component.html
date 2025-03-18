@@ -1,29 +1,64 @@
-<div class="row h-100">
-    <div class="col--lg-12 col--md-12 col--sm-12 d-flex align-items-center justify-content-center">
-        <div class="card">
-            <img class="card-img-top" alt="Card image cap">
-            <div class="card-body">
-                <ul class="m-0 p-0 d-flex">
-                    <ng-container *ngFor="let tab of tabs, let idx = index">
-                        <li class="px-2">
-                            <button class="btn btn-primary btn-md" (click)="selectTab(tab)">
-                                {{tab.label}}
-                            </button>
-                        </li>
-                    </ng-container>
-                </ul>
-                <div class="w-100" [ngSwitch]="currentModule">
-                    <ng-container *ngSwitchDefault>
-                        <p>Sign In</p>
-                    </ng-container>
-                    <ng-container *ngSwitchCase="'sign-up'">
-                        <p>Sign Up</p>
-                    </ng-container>
-                    <ng-container *ngSwitchCase="'forgot-password'">
-                        <p>Forgot Password</p>
-                    </ng-container>
+<div class="align-items-center justify-content-center h-100 d-flex flex-column">
+    <h2 class="h2 mb-5">Welcome to College Management System</h2>
+    <div class="row shadow h-50 rounded p-5 user-form w-75">
+        <div class="col-1 col-lg-3 col-md-3 col-sm-12 border-end">
+            <ul class="m-0 p-0">
+                <ng-container *ngFor="let tab of tabs, let idx = index">
+                    <li class="p-2" [ngClass]="{'border-top border-bottom': idx === 1, 'active-module': tab.key === currentModule}" (click)="switchTab(tab)">
+                        {{tab.label}}</li>
+                </ng-container>
+            </ul>
+        </div>
+        <div class="col-1 col-lg-9 col-md-9 col-sm-12" [ngSwitch]="currentModule">
+            <form [formGroup]="userForm" (submit)="login()">
+                <ng-container *ngSwitchDefault>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Username</span>
+                        <input type="text" class="form-control" placeholder="Your username" aria-label="username"
+                            aria-describedby="basic-addon1" formControlName="username">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Password</span>
+                        <input type="password" class="form-control" placeholder="Your password" aria-label="password"
+                            aria-describedby="basic-addon1" formControlName="password">
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="'sign-up'">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Username</span>
+                        <input type="text" class="form-control" placeholder="Enter a desired username" aria-label="username"
+                            aria-describedby="basic-addon1" formControlName="username">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Email Address</span>
+                        <input type="email" class="form-control" placeholder="Enter your email address" aria-label="email address"
+                            aria-describedby="basic-addon1" formControlName="emailAddress">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Password</span>
+                        <input type="password" class="form-control" placeholder="Enter your desired password" aria-label="password"
+                            aria-describedby="basic-addon1" formControlName="password">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Confirm Password</span>
+                        <input type="password" class="form-control" placeholder="Re-enter your password" aria-label="confirm password"
+                            aria-describedby="basic-addon1" formControlName="cpassword">
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="'forgot-password'">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">E-Mail Address</span>
+                        <input type="email" class="form-control" placeholder="Enter your associated email address" aria-label="email address"
+                            aria-describedby="basic-addon1" formControlName="emailAddress">
+                    </div>
+                </ng-container>
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
                 </div>
-            </div>
+            </form>
+            <ng-container *ngIf="userForm.valid && submitClicked">
+                <p class="userInput border rounded mt-3 p-2">{{userForm.value | json}}</p>
+            </ng-container>
         </div>
     </div>
 </div>

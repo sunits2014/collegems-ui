@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  public year: any;
+
+  constructor() {
+    this.year = new Date().getUTCFullYear();
+  }
 }

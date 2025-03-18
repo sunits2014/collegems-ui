@@ -1,3 +1,23 @@
 ul li {
     list-style-type: none;
+    cursor: pointer;
+    color: darkgrey;
 }
+
+ul li:hover {
+    background-color: whitesmoke;
+}
+
+.user-form {
+    background-color: white;
+}
+
+.active-module {
+    color: #0672cb !important;
+    font-weight: 600;
+}
+
+.userInput {
+    background-color: beige;
+}
+
